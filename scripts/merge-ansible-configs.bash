@@ -9,15 +9,9 @@ LOCCONF="$LOCHOME/.config"
 LOCBIN="$LOCHOME/.local/bin"
 LOCETC="/etc"
 
-# Update config repos
-for REPO in "${REPOS[@]}"; do
-	echo "$REPO_DIR"/"$REPO"
-done
-echo ""
-
 # Update repo configs
+# cp -r "$LOCCONF"/nvim/* "$REPO_DIR"/mps-nvim
 cp "$LOCHOME"/.vimrc "$REPO_DIR"/mps-vim
-cp -r "$LOCCONF"/nvim "$REPO_DIR"/mps-nvim
 cp "$LOCBIN"/*.bash "$REPO_DIR"/mps-scripts/scripts
 cp "$LOCETC"/bash_aliases.d/.bashrc_alias_* "$REPO_DIR"/mps-bash-aliases
 

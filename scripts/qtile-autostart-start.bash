@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Kill old instances
+SNIPPETS=~/mps/snippets
+"$SNIPPETS"/autostart_clean.sh
+
+# Setup X
+PRIMARY_DISPLAY=HDMI-1
+PRIMARY_SCALE=1.0x1.0
+SECONDARY_DISPLAY=DP-1
+SECONDARY_SCALE=1.6x1.6
+
+xrandr --output "$PRIMARY_DISPLAY" --primary --auto --mode 3840x2160 --pos 0x0 --scale "$PRIMARY_SCALE" --rotate normal \
+    --output "$SECONDARY_DISPLAY" --mode 1920x1080 --pos 3840x1080 --scale "$SECONDARY_SCALE" --rotate normal 
+xset s off &
+xset -dpms &
+xset r rate 250 50 &
+setxkbmap de &
+
+# dconf settings
+dconf load / <~/.config/dconf/config.ini
+
+# Tray apps and daemons
+KBDMAPPER=kanata
+COMPOSITOR=picom
+NETMON=nm-applet
+DUNST=dunst
+VOLMON=volumeicon
+SCRATCHTERM=tilda
+SYSMON=gnome-system-monitor
+POLKIT=lxpolkit
+MAILTRAY=birdtray
+ALL="$COMPOSITOR $NETMON $VOLMON $DUNST $SYSMON $POLKIT"
+# for comp in "${ALL[@]}"; do
+#     "$comp" &
+# done
+$(sleep 3 && "$COMPOSITOR" --backend xrender) &
+"$NETMON" &
+"$VOLMON" &
+"$DUNST" &
+"$KANATA" &
+# "$SCRATCHTERM" &
+"$SYSMON" "$POLKIT" &
+# "$MAILTRAY" &
+#
+# Trigger resurrect plugin (tmux) with dummy session
+#kitty bash -c "tmux start-server; tmux new-session -d -s autostart ; sleep 3"
+#kitty bash -c "tmux kill-session -t autostart"
+
+# Default tmux sessions
+#kitty bash -c "tmux new-session -d -s scratchpad -c ~/mps/scratch"
+# kitty bash -c "tmuxinator start scratchpad &"

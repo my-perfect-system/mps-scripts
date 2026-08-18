@@ -2,8 +2,8 @@
 
 CODE_HDMI=0x11
 CODE_DPORT=0x0f
-BUS_GIGA=4
-BUS_ASUS=13
+BUS_GIGA=9
+BUS_ASUS=7
 MODE="$1"
 
 set_display_otr() {

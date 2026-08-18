@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# REPO_DIR=/srv/repo
+# REPO_DIR=/srv/repo/github/my-perfect-system
 REPO_DIR=/home/jb/repo/github/my-perfect-system
 REPOS=("mps-vim" "mps-nvim" "mps-bash-aliases" "mps-scripts")
 
